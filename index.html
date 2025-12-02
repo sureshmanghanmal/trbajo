@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limusinas VIP | Alquiler de Lujo con Chofer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">Limusinas VIP</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#buscar">Buscar/Reservar</a></li>
+                    <li><a href="flota.html">Nuestra Flota</a></li>
+                    <li><a href="testimonios.html">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>LUJO EN MOVIMIENTO.<br>EXPERIENCIAS MEMORABLES.</h1>
+            <p>Elige entre la flota más exclusiva de limusinas y vehículos de lujo con chófer profesional.</p>
+            <a href="#buscar" class="cta-button">
+                <i class="fas fa-search"></i> CALCULA TU VIAJE Y RESERVA AHORA
+            </a>
+        </div>
+    </section>
+
+    <section id="buscar" class="search-section">
+        <h2>Encuentra Tu Vehículo Perfecto</h2>
+        <form id="search-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tipo-servicio">
+                        <i class="fas fa-handshake"></i> Tipo de Servicio
+                    </label>
+                    <select id="tipo-servicio" required>
+                        <option value="con-chofer">Alquiler con Chófer</option>
+                        <option value="sin-chofer">Alquiler sin Chófer (Solo vehículos de lujo)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="duracion">
+                        <i class="fas fa-clock"></i> Duración (Horas)
+                    </label>
+                    <input type="number" id="duracion" value="3" min="1" max="24" required>
+                </div>
+            </div>
+
+            <div class="filters-section">
+                <h3><i class="fas fa-filter"></i> Filtros de Características</h3>
+                
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="filter-title"><i class="fas fa-users"></i> Capacidad</label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="capacidad" value="solo 2">
+                            <span>Solo 2 pasajeros (Deportivo)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="capacidad" value="solo 4">
+                            <span>Solo 4 pasajeros (Sedán)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="capacidad" value="8-10">
+                            <span>8-10 pasajeros (Clásica)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="capacidad" value="12-14">
+                            <span>12-14 pasajeros (SUV)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="capacidad" value="16+">
+                            <span>16+ pasajeros (Party Bus)</span>
+                        </label>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-title"><i class="fas fa-car"></i> Tipo de Vehículo</label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo" value="clasica">
+                            <span>Limusina Clásica</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo" value="suv">
+                            <span>Limusina SUV/Bus</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo" value="sedan">
+                            <span>Sedán de Lujo</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="tipo" value="deportivo">
+                            <span>Deportivo/Exótico</span>
+                        </label>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-title"><i class="fas fa-cocktail"></i> Comodidades</label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="comodidad" value="bar">
+                            <span>Bar Completo</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="comodidad" value="sonido">
+                            <span>Sonido Premium</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="comodidad" value="wifi">
+                            <span>Wi-Fi</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="comodidad" value="privacidad">
+                            <span>Ventanas de Privacidad</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="comodidad" value="pista">
+                            <span>Pista de Baile</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="comodidad" value="gps">
+                            <span>Navegación GPS</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="cta-button search-btn">
+                <i class="fas fa-search"></i> Buscar Vehículos Disponibles
+            </button>
+        </form>
+
+        <div id="results-container" class="results-container">
+            <p class="initial-message">
+                <i class="fas fa-arrow-up"></i><br>
+                Utiliza el formulario y los filtros para encontrar tu vehículo ideal.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Limusinas VIP</div>
+            <p>&copy; 2024 Limusinas VIP. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
