@@ -1,0 +1,695 @@
+/* RESET Y VARIABLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #A00000;
+    --primary-dark: #800000;
+    --secondary: #1a1a2e;
+    --accent: #d4af37;
+    --text: #333;
+    --light: #f8f9fa;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background: white;
+    scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, var(--secondary) 0%, #16213e 100%);
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.navbar nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.navbar nav ul li a:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="%23ffffff" fill-opacity="0.02" width="50" height="50"/></svg>');
+    animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+.hero-content {
+    z-index: 1;
+    padding: 40px;
+    max-width: 900px;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* BOTONES */
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 18px 40px;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 50px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(160, 0, 0, 0.4);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(160, 0, 0, 0.6);
+}
+
+/* SECCIÓN DE BÚSQUEDA */
+.search-section {
+    padding: 100px 5%;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.search-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    color: var(--secondary);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.search-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 2px;
+}
+
+#search-form {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--shadow);
+    max-width: 1000px;
+    margin: 0 auto 60px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group select,
+.form-group input[type="number"] {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: all 0.3s;
+}
+
+.form-group select:focus,
+.form-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(160, 0, 0, 0.1);
+}
+
+/* FILTROS */
+.filters-section h3 {
+    margin: 30px 0 20px;
+    color: var(--secondary);
+    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.filter-group {
+    padding: 20px;
+    background: var(--light);
+    border-radius: 12px;
+}
+
+.filter-title {
+    font-weight: 700;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.checkbox-label:hover {
+    padding-left: 5px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.checkbox-label span {
+    font-size: 0.95em;
+}
+
+.search-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* RESULTADOS */
+.results-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 200px;
+}
+
+.initial-message {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+    padding: 80px 20px;
+    font-size: 1.1em;
+}
+
+.initial-message i {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.limo-card {
+    background: white;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 180px 1fr auto;
+    gap: 25px;
+    align-items: center;
+    box-shadow: 0 5px 20px var(--shadow);
+    transition: all 0.3s;
+}
+
+.limo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.limo-card img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: var(--light);
+}
+
+.limo-details h3 {
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+.limo-description {
+    color: #888;
+    font-size: 0.9em;
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+.limo-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.limo-info span {
+    font-size: 0.95em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.limo-info span i {
+    color: var(--primary);
+    width: 20px;
+}
+
+.limo-reservation {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.limo-price {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+.limo-reservation p:not(.limo-price) {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.limo-reservation .cta-button {
+    padding: 12px 30px;
+    font-size: 1em;
+}
+
+/* SECCIÓN FLOTA */
+.fleet-section {
+    padding: 100px 5%;
+    background: white;
+    text-align: center;
+}
+
+.fleet-section h2 {
+    font-size: 2.5em;
+    color: var(--secondary);
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    color: #666;
+    font-size: 1.2em;
+    margin-bottom: 60px;
+    text-align: center; 
+}
+
+.fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.fleet-card {
+    padding: 40px 30px;
+    background: var(--light);
+    border-radius: 15px;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+}
+
+.fleet-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px var(--shadow);
+    background: white;
+}
+
+.fleet-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fleet-btn:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(160, 0, 0, 0.4);
+}
+
+.fleet-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2em;
+    color: white;
+}
+
+.fleet-card h3 {
+    color: var(--secondary);
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.fleet-card p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* TESTIMONIOS */
+.testimonials-section {
+    padding: 100px 5%;
+    background: linear-gradient(135deg, var(--secondary) 0%, #16213e 100%);
+    color: white;
+    text-align: center;
+}
+
+.testimonials-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.testimonials-section .section-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 60px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.review-card {
+    background: white;
+    color: var(--text);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stars {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.review-text {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 2px solid var(--light);
+}
+
+.reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.reviewer div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.reviewer-name {
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.reviewer-event {
+    font-size: 0.85em;
+    color: #999;
+}
+
+/* CONTACTO */
+.contact-section {
+    padding: 100px 5%;
+    background: var(--light);
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 2.5em;
+    color: var(--secondary);
+    margin-bottom: 15px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1000px;
+    margin: 60px auto 0;
+}
+
+.contact-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--shadow);
+    transition: all 0.3s;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.contact-card i {
+    font-size: 3em;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.contact-card h3 {
+    color: var(--secondary);
+    margin-bottom: 15px;
+}
+
+.contact-card p {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.contact-hours {
+    font-size: 0.9em;
+    color: #999;
+}
+
+/* FOOTER */
+.footer {
+    background: var(--secondary);
+    color: white;
+    padding: 40px 5%;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5em;
+    transition: all 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--accent);
+    transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .navbar nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    
+    .limo-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .limo-reservation {
+        align-items: center;
+    }
+    
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+}
