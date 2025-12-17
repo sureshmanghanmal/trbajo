@@ -17,13 +17,13 @@ const typeLabels = {
     deportivo: { title: 'Deportivos', icon: 'fa-tachometer-alt', description: 'Máxima velocidad y estilo. Disponible para alquiler sin chófer (según modelo).' }
 };
 
-// RANGOS DE CAPACIDAD (mejorado para filtrado por rangos)
+// RANGOS DE CAPACIDAD: Las claves coinciden con los value="" del HTML
 const capacityRanges = {
-    '1-2': { min: 1, max: 2, label: '2 ' },
-    '1-4': { min: 1, max: 4, label: '4 ' },
-    '5-8': { min: 5, max: 8, label: '8 ' },
-    '9-12': { min: 9, max: 12, label: '12 ' },
-    '16+': { min: 16, max: Infinity, label: '+16 ' }
+    '2':  { min: 1, max: 2, label: '2 Pasajeros' },       // Deportivos
+    '4':  { min: 3, max: 4, label: '4 Pasajeros' },       // Sedanes
+    '8':  { min: 5, max: 10, label: '8 Pasajeros' },      // Limusinas (cubre 8 y 10)
+    '12': { min: 11, max: 15, label: '12 Pasajeros' },    // Limusinas grandes (cubre 12 y 14)
+    '16': { min: 16, max: Infinity, label: '16+ Pasajeros' } // Party Bus
 };
 
 // BASE DE DATOS DE LIMUSINAS Y COCHES DE LUJO
@@ -36,7 +36,7 @@ const fleetData = [
     // --- SUV ---
     { id: 2, name: "Hummer H2 (SUV Gigante)", type: "suv", capacity: 8, features: ["bar", "sonido", "wifi"], hasDriver: true, basePricePerHour: 190, img: "https://image-proxy.kws.kaavan.es/i/auto-auto/webs/393/images/rMepvdMa-OBdbmLq1Xy-(edit).jpg?format=webp" },
     { id: 3, name: "Cadillac Escalade (SUV Ejecutiva)", type: "suv", capacity: 8, features: ["sonido", "wifi"], hasDriver: true, basePricePerHour: 120, img: "https://www.cadillac.com/content/dam/cadillac/na/us/english/index/vehicles/future-and-concept/future-vehicles/escalade-mcm/colorizer/vehicle/25-escalade-1sg-gxp-l-v2.jpg?imwidth=1200" },
-    { id: 10, name: "Party Bus (Mega Fiesta)", type: "suv", capacity: +16, features: ["bar", "sonido", "wifi", "pista"], hasDriver: true, basePricePerHour: 300, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMfzlZ2HPV-do7GcxFGaAAZqUnhJYtB8exIw&s" },
+    { id: 10, name: "Party Bus (Mega Fiesta)", type: "suv", capacity: 16, features: ["bar", "sonido", "wifi", "pista"], hasDriver: true, basePricePerHour: 300, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMfzlZ2HPV-do7GcxFGaAAZqUnhJYtB8exIw&s" },
     
     // --- COCHES DE LUJO ---
     { id: 4, name: "Mercedes Clase S (Sedán Lujo)", type: "sedan", capacity: 4, features: ["wifi"], hasDriver: true, basePricePerHour: 180, img: "https://grupoditram.com/wp-content/uploads/2023/07/sprin-1-1024x546.jpg" },
@@ -175,7 +175,8 @@ function initializeSearchPage() {
     const form = document.getElementById('search-form');
     const resultsContainer = document.getElementById('results-container');
     const durationInput = document.getElementById('duracion');
-    const tipoServicioSelect = document.getElementById('tipo-servicio');
+    // Mantiene la referencia al elemento, puede ser null si no se encuentra
+    const tipoServicioSelect = document.getElementById('tipo-servicio'); 
 
     // Mostrar mensaje inicial
     showInitialMessage();
@@ -193,19 +194,26 @@ function initializeSearchPage() {
         durationTimer = setTimeout(filterAndDisplayResults, 500);
     });
     
-    tipoServicioSelect.addEventListener('change', filterAndDisplayResults);
+    // Solo añade el listener si el elemento existe
+    if (tipoServicioSelect) {
+        tipoServicioSelect.addEventListener('change', filterAndDisplayResults);
+    }
     
     // Event listeners para todos los checkboxes
     document.querySelectorAll('.filters-grid input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', filterAndDisplayResults);
     });
 
-    // FUNCIÓN PRINCIPAL DE FILTRADO Y VISUALIZACIÓN (MEJORADA)
+    // FUNCIÓN PRINCIPAL DE FILTRADO Y VISUALIZACIÓN (CORREGIDA)
     function filterAndDisplayResults() {
         const duration = parseInt(durationInput.value) || 1;
-        const selectedServiceType = tipoServicioSelect.value;
         
-        // Obtener rangos de capacidad seleccionados
+        // --- CORRECCIÓN CLAVE ---
+        // Si tipoServicioSelect es null o no tiene valor, usa 'todos' por defecto.
+        const selectedServiceType = tipoServicioSelect ? tipoServicioSelect.value : 'todos'; 
+        // -------------------------
+        
+        // Obtener rangos de capacidad seleccionados (values del HTML)
         const selectedCapacityRanges = Array.from(
             document.querySelectorAll('input[name="capacidad"]:checked')
         ).map(cb => cb.value);
@@ -223,61 +231,48 @@ function initializeSearchPage() {
         // DEBUG: Mostrar en consola lo que se está filtrando
         console.log('Filtros aplicados:', {
             duration,
-            selectedServiceType,
+            selectedServiceType, // Ahora ya no causará un ReferenceError
             selectedCapacityRanges,
             selectedTypes,
             selectedComodidades
         });
 
-        // FILTRADO MEJORADO
+        // FILTRADO
         const filteredLimos = fleetData.filter(limo => {
-            // 1. Filtro por Tipo de Servicio
-            if (selectedServiceType === 'con-chofer' && !limo.hasDriver) {
-                console.log(`${limo.name} - Rechazado: Requiere chófer y no lo tiene`);
-                return false;
-            }
-            if (selectedServiceType === 'sin-chofer' && limo.hasDriver) {
-                console.log(`${limo.name} - Rechazado: Solo sin chófer y tiene chófer`);
-                return false;
-            }
+            // 1. Filtro por Tipo de Servicio (Ahora funciona)
+            if (selectedServiceType === 'con-chofer' && !limo.hasDriver) return false;
+            if (selectedServiceType === 'sin-chofer' && limo.hasDriver) return false;
 
-            // 2. Filtro por Capacidad (usando rangos)
+            // 2. Filtro por Capacidad (Ahora se ejecuta sin interrupciones)
             if (selectedCapacityRanges.length > 0) {
                 const matchesCapacity = selectedCapacityRanges.some(rangeKey => {
-                    const range = capacityRanges[rangeKey];
+                    // Usamos .toString() para asegurar la coincidencia de claves
+                    const range = capacityRanges[rangeKey.toString()]; 
+                    
                     if (!range) {
-                        console.warn(`Rango no encontrado: ${rangeKey}`);
-                        return false;
+                        return false; 
                     }
-                    const matches = limo.capacity >= range.min && limo.capacity <= range.max;
-                    console.log(`${limo.name} (${limo.capacity} pax) vs Rango ${rangeKey} (${range.min}-${range.max}): ${matches}`);
-                    return matches;
+
+                    // Verifica si la capacidad del coche (ej: 4) está entre min y max del rango (ej: 3 y 4)
+                    return limo.capacity >= range.min && limo.capacity <= range.max;
                 });
                 
-                if (!matchesCapacity) {
-                    console.log(`${limo.name} - Rechazado: No cumple rango de capacidad`);
-                    return false;
-                }
+                if (!matchesCapacity) return false;
             }
 
             // 3. Filtro por Tipo de Vehículo (OR)
             if (selectedTypes.length > 0 && !selectedTypes.includes(limo.type)) {
-                console.log(`${limo.name} - Rechazado: Tipo ${limo.type} no está en ${selectedTypes.join(', ')}`);
                 return false;
             }
             
-            // 4. Filtro por Comodidades (AND: debe tener TODAS las seleccionadas)
+            // 4. Filtro por Comodidades (AND)
             if (selectedComodidades.length > 0) {
                 const hasAllFeatures = selectedComodidades.every(
                     feature => limo.features.includes(feature)
                 );
-                if (!hasAllFeatures) {
-                    console.log(`${limo.name} - Rechazado: No tiene todas las comodidades (tiene: ${limo.features.join(', ')}, requiere: ${selectedComodidades.join(', ')})`);
-                    return false;
-                }
+                if (!hasAllFeatures) return false;
             }
 
-            console.log(`${limo.name} - ✓ APROBADO`);
             return true;
         });
 
@@ -297,7 +292,7 @@ function initializeSearchPage() {
         `;
     }
 
-    // FUNCIÓN PARA MOSTRAR LOS RESULTADOS (MEJORADA)
+    // FUNCIÓN PARA MOSTRAR LOS RESULTADOS
     function displayResults(filteredLimos, duration, serviceType) {
         resultsContainer.innerHTML = '';
         
@@ -351,7 +346,7 @@ function initializeSearchPage() {
         });
     }
 
-    // FUNCIÓN PARA CREAR UNA TARJETA DE LIMUSINA (MEJORADA)
+    // FUNCIÓN PARA CREAR UNA TARJETA DE LIMUSINA
     function createLimoCard(limo, duration, serviceType) {
         const totalPrice = (limo.basePricePerHour * duration).toFixed(2);
         const driverStatus = limo.hasDriver ? 

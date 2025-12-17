@@ -49,6 +49,7 @@
                             <i class="fas fa-handshake"></i> Tipo de Servicio
                         </label>
                         <select id="tipo-servicio" required aria-required="true">
+                            <option value="todos">Todos los Servicios</option>
                             <option value="con-chofer">Alquiler con Chófer</option>
                             <option value="sin-chofer">Alquiler sin Chófer (Solo vehículos de lujo)</option>
                         </select>
@@ -71,27 +72,27 @@
                             <legend class="filter-title"><i class="fas fa-users"></i> Capacidad</legend>
                             
                             <label class="checkbox-label">
-                                <input type="checkbox" name="capacityMax" value="2">
+                                <input type="checkbox" name="capacidad" value="2">
                                 <span>2 pasajeros (Deportivo)</span>
                             </label>
                             
                             <label class="checkbox-label">
-                                <input type="checkbox" name="capacityMax" value="4">
+                                <input type="checkbox" name="capacidad" value="4">
                                 <span>4 pasajeros (Sedán/Lujo)</span>
                             </label>
                             
                             <label class="checkbox-label">
-                                <input type="checkbox" name="capacityMin" value="8">
+                                <input type="checkbox" name="capacidad" value="8">
                                 <span>8 pasajeros o más</span>
                             </label>
                             
                             <label class="checkbox-label">
-                                <input type="checkbox" name="capacityMin" value="12">
+                                <input type="checkbox" name="capacidad" value="12">
                                 <span>12 pasajeros o más</span>
                             </label>
                             
                             <label class="checkbox-label">
-                                <input type="checkbox" name="capacityMin" value="+16">
+                                <input type="checkbox" name="capacidad" value="16"> 
                                 <span>16+ pasajeros (Party Bus)</span>
                             </label>
                         </fieldset>
