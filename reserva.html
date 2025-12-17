@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Reserva | Limusinas VIP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">Limusinas VIP</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#buscar">Buscar/Reservar</a></li>
+                    <li><a href="flota.html">Nuestra Flota</a></li>
+                    <li><a href="testimonios.html">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-section" style="padding-top: 150px;" id="reservation-section">
+        <h2 id="limo-name-title">Finalizar Reserva</h2>
+        <p class="section-subtitle">Completa tus datos para asegurar tu vehículo.</p>
+
+        <div id="reserva-details" class="reserva-details-card">
+            <p style="text-align: center;">Cargando detalles del vehículo...</p>
+        </div>
+
+        <form id="reservation-form" class="reservation-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Nombre Completo</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date"><i class="fas fa-calendar-alt"></i> Fecha de Reserva</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time"><i class="fas fa-clock"></i> Hora de Inicio</label>
+                    <input type="time" id="time" required>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 30px;">
+                <label for="pickup"><i class="fas fa-map-marker-alt"></i> Dirección de Recogida</label>
+                <input type="text" id="pickup" required>
+            </div>
+
+            <button type="submit" class="cta-button search-btn" style="background: linear-gradient(135deg, #008000 0%, #006400 100%); box-shadow: 0 5px 20px rgba(0, 128, 0, 0.4);">
+                <i class="fas fa-check"></i> CONFIRMAR RESERVA Y PAGO
+            </button>
+
+            <p id="reservation-message" style="margin-top: 20px; text-align: center; color: #006400; font-weight: 600; display: none; padding: 15px; border: 1px solid #006400; border-radius: 8px; background: #e6ffe6;">
+                <i class="fas fa-check-circle"></i> ¡Reserva realizada con éxito! Recibirás un email de confirmación.
+            </p>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Limusinas VIP</div>
+            <p>&copy; 2024 Limusinas VIP. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
